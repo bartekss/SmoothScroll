@@ -1,8 +1,4 @@
 ﻿using Microsoft.VisualStudio.Text.Editor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
 
 namespace SmoothScroll
@@ -18,7 +14,9 @@ namespace SmoothScroll
 
         public override void PreprocessMouseWheel(MouseWheelEventArgs e)
         {
-            _wpfTextView.ViewScroller.ScrollViewportVerticallyByPixels(e.Delta);
+            var direction = e.Delta >= 0 ? ScrollDirection.Up : ScrollDirection.Down;
+
+            _wpfTextView.ViewScroller.ScrollViewportVerticallyByLine(direction);
             e.Handled = true;
         }
     }
